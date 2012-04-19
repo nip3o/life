@@ -8,18 +8,30 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'LifeEntry'
-        db.create_table('entries_lifeentry', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('date', self.gf('django.db.models.fields.DateTimeField')()),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('text', self.gf('django.db.models.fields.TextField')()),
-        ))
-        db.send_create_signal('entries', ['LifeEntry'])
+        # Deleting field 'LifeEntry.date'
+        db.delete_column('entries_lifeentry', 'date')
+
+        # Adding field 'LifeEntry.date_written'
+        db.add_column('entries_lifeentry', 'date_written',
+                      self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, default=datetime.datetime(2012, 4, 19, 0, 0), blank=True),
+                      keep_default=False)
+
+        # Adding field 'LifeEntry.about_date'
+        db.add_column('entries_lifeentry', 'about_date',
+                      self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2012, 4, 19, 0, 0)),
+                      keep_default=False)
 
     def backwards(self, orm):
-        # Deleting model 'LifeEntry'
-        db.delete_table('entries_lifeentry')
+        # Adding field 'LifeEntry.date'
+        db.add_column('entries_lifeentry', 'date',
+                      self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 19, 0, 0)),
+                      keep_default=False)
+
+        # Deleting field 'LifeEntry.date_written'
+        db.delete_column('entries_lifeentry', 'date_written')
+
+        # Deleting field 'LifeEntry.about_date'
+        db.delete_column('entries_lifeentry', 'about_date')
 
     models = {
         'contenttypes.contenttype': {
@@ -31,7 +43,8 @@ class Migration(SchemaMigration):
         },
         'entries.lifeentry': {
             'Meta': {'object_name': 'LifeEntry'},
-            'date': ('django.db.models.fields.DateTimeField', [], {}),
+            'about_date': ('django.db.models.fields.DateField', [], {}),
+            'date_written': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'text': ('django.db.models.fields.TextField', [], {}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '100'})
