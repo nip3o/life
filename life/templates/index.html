@@ -1,0 +1,17 @@
+{% load taggit_extras %}
+{% load life_extras %}
+{% get_tagcloud as tags %}
+
+Humdidum
+
+<ul>
+{% for entry in entries %}
+    <li>{{ entry }}</li>
+{% endfor %}
+</ul>
+
+<div style="font-size:15px; width: 800px">
+    {% for tag in tags %}
+    <span style="font-size:{{ tag.weight|floatformat:2|pointify }}em">{{tag}}</span>
+    {% endfor %}
+</div>
