@@ -12,18 +12,13 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'entries.views.index', name='index'),
 
-    url(r'^entries/(?P<pk>\d+)/$', 
-        DetailView.as_view(model = LifeEntry),
-        name = 'entry_detail'),
+    url(r'^entries/(?P<pk>\d+)/$',
+        DetailView.as_view(model=LifeEntry),
+        name='entry_detail'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-)
-
-# URLs for taggit_autocomplete_modified
-urlpatterns += patterns('',
-    url(r'^taggit_autocomplete_modified/', include('taggit_autocomplete_modified.urls')),
 )
