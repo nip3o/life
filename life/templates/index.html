@@ -1,15 +1,33 @@
 {% load taggit_extras %}
 {% load life_extras %}
 {% get_tagcloud as tags %}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<ul>
-{% for entry in entries %}
-    <li><a href="{% url entry_detail entry.pk %}">{{ entry }}</a></li>
-{% endfor %}
-</ul>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 
-<div style="font-size:15px; width: 800px">
-    {% for tag in tags %}
-    <span style="font-size:{{ tag.weight|floatformat:2|pointify }}em">{{tag}}</span>
-    {% endfor %}
-</div>
+    <title>Life</title>
+</head>
+    <body>
+        <article class="container">
+            <h1>Life.</h1>
+            <section>
+                <ul>
+                {% for entry in entries %}
+                    <li><a href="{% url entry_detail entry.pk %}">{{ entry }}</a></li>
+                {% endfor %}
+                </ul>
+
+                <div>
+                    {% for tag in tags %}
+                    <span style="font-size:{{ tag.weight|floatformat:2|pointify }}em">{{tag}}</span>
+                    {% endfor %}
+                </div>
+            </section>
+        </article>
+    </body>
+</html>
