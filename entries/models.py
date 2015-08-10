@@ -19,7 +19,7 @@ class LifeEntry(models.Model):
     tags = TaggableManager()
 
     def __unicode__(self):
-        return "%s - %s" % (_date(self.about_date, "j b"), self.title)
+        return "%s - %s" % (_date(self.about_date, "j b Y"), self.title)
 
     @staticmethod
     def get_entries():
