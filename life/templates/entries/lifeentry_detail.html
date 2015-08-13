@@ -1,9 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-<body>
-<h2>{{ lifeentry.title }}</h2>
-<p>
-{{ lifeentry.text|linebreaksbr }}
-</p>
-</body>
-</html> 
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ lifeentry.title }}</h1>
+    <section>
+        {{ lifeentry.text|linebreaksbr }}
+    </section>
+{% endblock content %}
