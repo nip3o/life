@@ -9,7 +9,7 @@
 <section>
     <ul>
     {% for entry in entries %}
-        <li><a href="{% url entry_detail entry.pk %}">{{ entry }}</a></li>
+        <li><a href="{% url "entry_detail" entry.pk %}">{{ entry }}</a></li>
     {% endfor %}
     </ul>
 
